@@ -10,7 +10,8 @@ public class User {
     private List<Book> borrowedBooks; // 借阅的书籍列表
 
     private int accountBalance;
-
+    private BookSearchStrategy searchStrategy;//search type
+    
     public User(String id, String name, String email) {
         this.id = id;
         this.name = name;
@@ -67,6 +68,14 @@ public class User {
         // 更新用户的罚款信息
         // 假设有一个属性叫做 fineAmount 来存储用户的总罚款金额
         this.accountBalance -= fine;
+    }
+    
+    //search book
+    public void setSearchStrategy(BookSearchStrategy searchStrategy){
+        this.searchStrategy = searchStrategy;
+    }
+    public void searchBook(String keyword){
+        searchStrategy.search(keyword);
     }
 }
 
