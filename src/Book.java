@@ -8,8 +8,10 @@ public class Book implements FineCalculator {
     private boolean isOverdue; // 是否超期
     private User currentUser; // 当前借阅用户
     private FineCalculator fineCalculator; // 超期罚款计算器
+    private String author;
     public Book(String title) {
         this.title = title;
+        this.author =author;
         this.isOverdue = false; // 默认未超期
         this.fineCalculator = new OverdueFineCalculator(this);
     }
@@ -18,6 +20,8 @@ public class Book implements FineCalculator {
     public String getTitle() {
         return title;
     }
+
+    public String getAuthor(){return author;}
 
     public LocalDate getBorrowDate() {
         return borrowDate;
@@ -79,6 +83,6 @@ public class Book implements FineCalculator {
     }
 
     public String toCSVFormat() {
-        return title + "," + (currentUser != null ? currentUser.getName() : "None") + "," + borrowDate + "," + dueDate + "," + isOverdue;
+        return title + ","  + author + ","+(currentUser != null ? currentUser.getName() : "None") + "," + borrowDate + "," + dueDate + "," + isOverdue;
     }
 }
