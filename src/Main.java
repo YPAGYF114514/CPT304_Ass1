@@ -115,7 +115,8 @@ public class Main {
             System.out.println("\nUser Menu");
             System.out.println("1. Check Out Book");
             System.out.println("2. Check In Book");
-            System.out.println("3. Exit");
+            System.out.println("3. Search Book");
+            System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume newline
@@ -134,6 +135,41 @@ public class Main {
                     library.checkInBook(checkinTitle);
                     break;
                 case 3:
+                    SearchPage p = new SearchPage();
+                    String keyword = "";
+                    String choice;
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+                    while (true) {
+                        System.out.println("\nEnter either '1' or '2' for search by Title or Author of Book respectively: ");
+                        choice = scanner.next();
+
+                        if (choice.equals("1") || choice.equals("2"))
+                            break;
+                        else
+                            System.out.println("\nWrong Input!");
+                    }
+
+                    if (choice.equals("1")) {
+                        System.out.println("\nEnter the Title of the Book: ");
+                        try {
+                            keyword = reader.readLine();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        p.setSearchStrategy(new TitleSearch());
+                        p.searchBook(keyword);
+                     } else {
+                        System.out.println("\nEnter the Author of the Book: ");
+                        try {
+                            keyword = reader.readLine();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        p.setSearchStrategy(new AuthorSearch());
+                        p.searchBook(keyword);
+                    }
+
+                case 4:
                     System.out.println("Exiting...");
                     return;
                 default:
