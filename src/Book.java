@@ -3,13 +3,15 @@ import java.time.temporal.ChronoUnit;
 
 public class Book {
     private String title;
+    private String author;
     private LocalDate borrowDate; // 借出日期
     private LocalDate dueDate; // 应还日期
     private boolean isOverdue; // 是否超期
     private User currentUser; // 当前借阅用户
-
+    
     public Book(String title) {
         this.title = title;
+        this.author =author;
         this.isOverdue = false; // 默认未超期
     }
 
@@ -18,6 +20,8 @@ public class Book {
         return title;
     }
 
+    public String getAuthor(){return author;}
+    
     public LocalDate getBorrowDate() {
         return borrowDate;
     }
@@ -64,6 +68,6 @@ public class Book {
     }
 
     public String toCSVFormat() {
-        return title + "," + (currentUser != null ? currentUser.getName() : "None") + "," + borrowDate + "," + dueDate + "," + isOverdue;
+        return title + "," + author + ","+(currentUser != null ? currentUser.getName() : "None") + "," + borrowDate + "," + dueDate + "," + isOverdue;
     }
 }
