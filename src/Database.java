@@ -35,7 +35,7 @@ public class Database {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                books.add(new Book(values[0]));
+                books.add(new Book(values[0],values[1]));
             }
         } catch (IOException e) {
             e.printStackTrace();
